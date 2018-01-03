@@ -3,6 +3,24 @@ sleep 2
 
 cd /home/container
 
+# Check if wipe.sh file exist for wipe.
+file="wipe.sh"
+if [ -f "$file" ]
+then
+    echo "Wipe detected"
+    chmod a+x $file
+    /bin/bash /home/container/$file
+    echo "Wipe finish."
+else
+    echo "Wipe not detected, skipping wipe"
+fi
+
+# Send msg to discord using webhook (example server starting)
+if [ -f DISCORD_FLAG ] || [ "${DISCORD}" = 1 ]; then
+    echo "Sending msg to discord"
+    curl -X POST --data '{ "embeds": [{"title": "Rust-Monitor", "description": "Server starting"}] }' -H "Content-Type: application/json" ${DISCORDURL}
+fi
+
 # Update Rust Server
 ./steam/steamcmd.sh +login anonymous +force_install_dir /home/container +app_update 258550 +quit
 
