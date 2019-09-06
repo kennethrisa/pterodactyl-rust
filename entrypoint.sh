@@ -30,8 +30,10 @@ echo ":/home/container$ ${MODIFIED_STARTUP}"
 
 if [ -f OXIDE_FLAG ] || [ "${OXIDE}" = 1 ]; then
     echo "Updating OxideMod..."
-    oxide=$(curl -s https://api.github.com/repos/OxideMod/Oxide.Rust/releases/latest | jq -r ".assets[] | select(.name | test(\"${spruce_type}\")) | .browser_download_url")
-    curl -sSL $oxide > oxide.zip
+    #oxide=$(curl -s https://api.github.com/repos/OxideMod/Oxide.Rust/releases/latest | jq -r ".assets[] | select(.name | test(\"${spruce_type}\")) | .browser_download_url")
+    #curl -sSL $oxide > oxide.zip
+    # Fix for linux oxide build 06.09.2019
+    curl -sSL https://umod.org/games/rust/download/develop > oxide.zip
     unzip -o -q oxide.zip
     rm oxide.zip
     echo "Done updating OxideMod!"
