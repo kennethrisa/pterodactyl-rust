@@ -5,7 +5,7 @@ MAINTAINER Isaac A., <isaac@isaacs.site>
 RUN apt update \
     && apt upgrade -y \
     && apt install -y lib32gcc1 lib32stdc++6 unzip curl iproute2 jq \
-    && curl -sL https://deb.nodesource.com/setup_6.x | bash - \
+    && curl -sL https://deb.nodesource.com/setup_10.x | bash - \
     && apt install -y nodejs \
     && mkdir /node_modules \
     && npm install --prefix / ws \
